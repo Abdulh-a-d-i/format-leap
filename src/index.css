@@ -2,41 +2,64 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* File Converter Design System - Inspired by iLovePDF
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
+    /* Core Colors - Blue theme inspired by iLovePDF */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
+    --foreground: 224 71.4% 4.1%;
+    
+    /* Primary Blue - Main brand color */
+    --primary: 221.2 83.2% 53.3%;
     --primary-foreground: 210 40% 98%;
+    --primary-glow: 221.2 83.2% 63.3%;
+    
+    /* Secondary Colors */
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+    
+    /* Success/Error States */
+    --success: 142.1 76.2% 36.3%;
+    --success-foreground: 355.7 100% 97.3%;
+    --error: 0 84.2% 60.2%;
+    --error-foreground: 210 40% 98%;
+    
+    /* Muted Colors */
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    
+    /* Card & Components */
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+    
+    /* Interactive Elements */
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 221.2 83.2% 53.3%;
+    
+    /* Upload Zone */
+    --upload-border: 221.2 83.2% 53.3%;
+    --upload-bg: 221.2 83.2% 97%;
+    --upload-hover: 221.2 83.2% 95%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(221.2 83.2% 53.3%), hsl(221.2 83.2% 63.3%));
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(220 14.3% 98%));
+    
+    /* Shadows */
+    --shadow-soft: 0 1px 3px 0 hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --shadow-medium: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -2px hsl(0 0% 0% / 0.1);
+    --shadow-large: 0 10px 15px -3px hsl(0 0% 0% / 0.1), 0 4px 6px -4px hsl(0 0% 0% / 0.1);
+    --shadow-blue: 0 4px 6px -1px hsl(221.2 83.2% 53.3% / 0.2);
+    
+    /* Animation */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +123,82 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+@layer components {
+  /* Upload Zone Styles */
+  .upload-zone {
+    @apply border-2 border-dashed rounded-xl p-8 text-center transition-all duration-300;
+    border-color: hsl(var(--upload-border));
+    background: hsl(var(--upload-bg));
+  }
+  
+  .upload-zone:hover {
+    background: hsl(var(--upload-hover));
+    box-shadow: var(--shadow-blue);
+    transform: translateY(-2px);
+  }
+  
+  .upload-zone.drag-over {
+    border-color: hsl(var(--primary));
+    background: hsl(var(--primary) / 0.05);
+    box-shadow: var(--shadow-blue);
+  }
+  
+  /* Button Variants */
+  .btn-converter {
+    @apply px-8 py-3 rounded-lg font-semibold transition-all duration-300;
+    background: var(--gradient-primary);
+    color: hsl(var(--primary-foreground));
+    box-shadow: var(--shadow-medium);
+  }
+  
+  .btn-converter:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-large);
+  }
+  
+  .btn-converter:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  /* Loading Animation */
+  .loading-spinner {
+    @apply inline-block w-4 h-4 border-2 border-solid rounded-full animate-spin;
+    border-color: hsl(var(--primary-foreground)) hsl(var(--primary-foreground)) hsl(var(--primary-foreground)) transparent;
+  }
+  
+  /* Success/Error Messages */
+  .message-success {
+    @apply flex items-center gap-2 p-4 rounded-lg;
+    background: hsl(var(--success) / 0.1);
+    color: hsl(var(--success));
+    border: 1px solid hsl(var(--success) / 0.2);
+  }
+  
+  .message-error {
+    @apply flex items-center gap-2 p-4 rounded-lg;
+    background: hsl(var(--error) / 0.1);
+    color: hsl(var(--error));
+    border: 1px solid hsl(var(--error) / 0.2);
+  }
+  
+  /* Card Styling */
+  .converter-card {
+    @apply p-8 rounded-2xl border;
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-soft);
+    border-color: hsl(var(--border));
+  }
+  
+  /* File Display */
+  .file-display {
+    @apply flex items-center gap-3 p-4 rounded-lg border;
+    background: hsl(var(--muted) / 0.5);
+    border-color: hsl(var(--border));
   }
 }
