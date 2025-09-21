@@ -29,7 +29,9 @@ export const convertFile = async (
     // Get the target format from conversion type
     const fileExtension = '.' + file.name.split('.').pop()?.toLowerCase();
     const options = getConversionOptions(fileExtension);
-    const selectedOption = options.find(opt => opt.value === conversionType);
+    const selectedOption = options.find(
+    opt => opt.value === conversionType || opt.target === conversionType
+    );
     
     if (!selectedOption) {
       throw new Error('Invalid conversion type selected');
