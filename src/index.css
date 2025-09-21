@@ -2,20 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* File Converter Design System - Inspired by iLovePDF
+/* File Converter Design System - Exact iLovePDF Colors
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    /* Core Colors - Blue theme inspired by iLovePDF */
+    /* Core Colors - iLovePDF theme */
     --background: 0 0% 100%;
-    --foreground: 224 71.4% 4.1%;
+    --foreground: 0 0% 15%;
     
-    /* Primary Blue - Main brand color */
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --primary-glow: 221.2 83.2% 63.3%;
+    /* Primary Red - Main brand color like iLovePDF */
+    --primary: 0 84% 60%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 0 84% 70%;
     
     /* Secondary Colors */
     --secondary: 220 14.3% 95.9%;
@@ -41,19 +41,19 @@ All colors MUST be HSL.
     --ring: 221.2 83.2% 53.3%;
     
     /* Upload Zone */
-    --upload-border: 221.2 83.2% 53.3%;
-    --upload-bg: 221.2 83.2% 97%;
-    --upload-hover: 221.2 83.2% 95%;
+    --upload-border: 0 84% 60%;
+    --upload-bg: 0 84% 97%;
+    --upload-hover: 0 84% 95%;
     
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(221.2 83.2% 53.3%), hsl(221.2 83.2% 63.3%));
-    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(220 14.3% 98%));
+    --gradient-primary: linear-gradient(135deg, hsl(0 84% 60%), hsl(0 84% 70%));
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(0 0% 98%));
     
     /* Shadows */
     --shadow-soft: 0 1px 3px 0 hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
     --shadow-medium: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -2px hsl(0 0% 0% / 0.1);
     --shadow-large: 0 10px 15px -3px hsl(0 0% 0% / 0.1), 0 4px 6px -4px hsl(0 0% 0% / 0.1);
-    --shadow-blue: 0 4px 6px -1px hsl(221.2 83.2% 53.3% / 0.2);
+    --shadow-red: 0 4px 6px -1px hsl(0 84% 60% / 0.2);
     
     /* Animation */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -137,14 +137,14 @@ All colors MUST be HSL.
   
   .upload-zone:hover {
     background: hsl(var(--upload-hover));
-    box-shadow: var(--shadow-blue);
+    box-shadow: var(--shadow-red);
     transform: translateY(-2px);
   }
   
   .upload-zone.drag-over {
     border-color: hsl(var(--primary));
     background: hsl(var(--primary) / 0.05);
-    box-shadow: var(--shadow-blue);
+    box-shadow: var(--shadow-red);
   }
   
   /* Button Variants */

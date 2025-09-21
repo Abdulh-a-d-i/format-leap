@@ -14,7 +14,7 @@ const ConvertButton: React.FC<ConvertButtonProps> = ({
 }) => {
   return (
     <button
-      className="btn-converter w-full flex items-center justify-center gap-2"
+      className="btn-converter text-xl py-6 px-12 flex items-center justify-center gap-2 mx-auto"
       disabled={disabled || loading}
       onClick={onClick}
     >
@@ -25,7 +25,7 @@ const ConvertButton: React.FC<ConvertButtonProps> = ({
         </>
       ) : (
         <>
-          <RefreshCw className="w-4 h-4" />
+          <RefreshCw className="w-5 h-5" />
           Convert File
         </>
       )}

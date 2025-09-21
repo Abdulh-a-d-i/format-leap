@@ -68,28 +68,26 @@ const FileUploader: React.FC<FileUploaderProps> = ({
   };
 
   return (
-    <div className="space-y-4">
+    <div className="text-center space-y-4">
       {!selectedFile ? (
-        <div
-          className={`upload-zone ${dragOver ? 'drag-over' : ''}`}
-          onDragOver={handleDragOver}
-          onDragLeave={handleDragLeave}
-          onDrop={handleDrop}
-          onClick={() => document.getElementById('file-input')?.click()}
-        >
-          <div className="flex flex-col items-center gap-4">
-            <div className="p-4 rounded-full bg-primary/10">
-              <Upload className="w-8 h-8 text-primary" />
-            </div>
-            <div className="text-center">
-              <p className="text-lg font-semibold text-foreground mb-2">
-                Drop your file here or click to browse
-              </p>
-              <p className="text-sm text-muted-foreground">
-                Supported formats: {supportedTypes.join(', ')}
-              </p>
-            </div>
-          </div>
+        <div className="max-w-md mx-auto">
+          <button
+            className="btn-converter text-xl py-6 px-12 w-full mb-4"
+            onClick={() => document.getElementById('file-input')?.click()}
+          >
+            Select {supportedTypes.includes('.pdf') ? 'PDF' : supportedTypes[0].replace('.', '').toUpperCase()} file
+          </button>
+          <p className="text-muted-foreground">
+            or drop {supportedTypes.includes('.pdf') ? 'PDF' : supportedTypes[0].replace('.', '').toUpperCase()} here
+          </p>
+          
+          {/* Hidden drag and drop area */}
+          <div
+            className={`fixed inset-0 pointer-events-none ${dragOver ? 'bg-primary/10 pointer-events-auto' : ''}`}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+          />
           
           <input
             id="file-input"
@@ -100,7 +98,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({
           />
         </div>
       ) : (
-        <div className="file-display">
+        <div className="file-display max-w-md mx-auto">
           <File className="w-5 h-5 text-primary flex-shrink-0" />
           <div className="flex-1 min-w-0">
             <p className="font-medium text-foreground truncate">{selectedFile.name}</p>
