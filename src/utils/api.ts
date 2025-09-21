@@ -4,7 +4,7 @@ import { getConversionOptions } from '@/components/ConversionSelector';
 const getBackendUrl = (): string => {
   // In a real Vite environment, we'd use import.meta.env.VITE_BACKEND_URL
   // For now, we'll use a default since .env isn't set up
-  const defaultUrl = 'http://localhost:8000/convert';
+  const defaultUrl = 'https://full-shrimp-deeply.ngrok-free.app/convert';
   
   // Log warning if using default URL
   if (!import.meta.env.VITE_BACKEND_URL) {
