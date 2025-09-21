@@ -44,8 +44,14 @@ const getConversionOptions = (fileExtension: string): ConversionOption[] => {
       ];
     case '.jpg':
     case '.jpeg':
+    case '.png':
+    case '.webp':
+    case '.bmp':
+    case '.gif':
+    case '.tiff':
+    case '.tif':
       return [
-        { value: 'jpg-to-pdf', label: 'JPG to PDF', target: 'pdf' },
+        { value: 'image-to-pdf', label: 'Image to PDF', target: 'pdf' },
       ];
     default:
       return [];
