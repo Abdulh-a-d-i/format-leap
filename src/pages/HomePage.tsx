@@ -121,22 +121,6 @@ const HomePage: React.FC = () => {
             split, compress, convert, rotate, unlock and watermark PDFs with just a few clicks.
           </p>
           
-          {/* Category Navigation */}
-          <div className="flex flex-wrap justify-center gap-2 mb-12">
-            {categories.map((category) => (
-              <button
-                key={category.name}
-                onClick={() => setActiveCategory(category.name)}
-                className={`px-6 py-3 rounded-full text-sm font-medium transition-all ${
-                  activeCategory === category.name
-                    ? 'bg-foreground text-background'
-                    : 'bg-secondary text-foreground hover:bg-muted'
-                }`}
-              >
-                {category.name}
-              </button>
-            ))}
-          </div>
         </div>
       </section>
 
