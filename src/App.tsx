@@ -6,7 +6,7 @@ import MergePage from "./pages/MergePage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
-@@ -17,6 +19,8 @@ const App = () => (
+const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
