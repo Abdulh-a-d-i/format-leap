@@ -6,7 +6,7 @@ const getBackendUrl = (): string => {
     console.warn("BACKEND_URL not found, using default:", defaultBase);
   }
   
-console.log defaultBase;
+  console.log defaultBase;
   return defaultBase;
   
 };
