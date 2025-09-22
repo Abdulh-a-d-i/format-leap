@@ -6,8 +6,10 @@ import ConvertButton from '@/components/ConvertButton';
 import DownloadSection from '@/components/DownloadSection';
 import UrlInput from '@/components/UrlInput';
 import ConversionSidebar from '@/components/ConversionSidebar';
+import HtmlInputSelector from '@/components/HtmlInputSelector';
 import { convertFile } from '@/utils/api';
 import { convertUrlToPdf } from '@/utils/htmlApi';
+import { compressFile } from '@/utils/compressApi';
 import { AlertTriangle, Download } from 'lucide-react';
 
 const conversionConfig: Record<string, {
@@ -95,6 +97,7 @@ const ConversionPage: React.FC = () => {
   
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [url, setUrl] = useState<string>('');
+  const [htmlContent, setHtmlContent] = useState<string>('');
   const [loading, setLoading] = useState(false);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
@@ -102,6 +105,7 @@ const ConversionPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   const isHtmlToPdf = type === 'html-to-pdf';
+  const isCompression = type?.includes('compress-');
 
   if (!config) {
     return (
@@ -147,7 +151,7 @@ const ConversionPage: React.FC = () => {
   };
 
   const handleConvert = async () => {
-    if (isHtmlToPdf && !url.trim()) return;
+    if (isHtmlToPdf && !url.trim() && !htmlContent.trim()) return;
     if (!isHtmlToPdf && !selectedFile) return;
     if (!type) return;
 
@@ -157,7 +161,16 @@ const ConversionPage: React.FC = () => {
     try {
       let result;
       if (isHtmlToPdf) {
-        result = await convertUrlToPdf(url);
+        if (url.trim()) {
+          result = await convertUrlToPdf(url);
+        } else {
+          // Handle HTML content conversion here
+          // For now, show an error as backend doesn't support HTML content yet
+          setError('HTML content conversion not yet supported. Please use URL instead.');
+          return;
+        }
+      } else if (isCompression) {
+        result = await compressFile(selectedFile!);
       } else {
         const targetFormat = getTargetFormat(type);
         result = await convertFile(selectedFile!, targetFormat);
@@ -177,13 +190,20 @@ const ConversionPage: React.FC = () => {
     }
   };
 
-  const handleUrlSubmit = () => {
+  const handleUrlSubmit = (inputUrl: string) => {
+    setUrl(inputUrl);
+    handleConvert();
+  };
+
+  const handleHtmlSubmit = (html: string) => {
+    setHtmlContent(html);
     handleConvert();
   };
 
   const handleReset = () => {
     setSelectedFile(null);
     setUrl('');
+    setHtmlContent('');
     resetResults();
   };
 
@@ -196,7 +216,7 @@ const ConversionPage: React.FC = () => {
     }
   };
 
-  const canConvert = isHtmlToPdf ? url.trim() && !loading : selectedFile && !loading;
+  const canConvert = isHtmlToPdf ? (url.trim() || htmlContent.trim()) && !loading : selectedFile && !loading;
 
   if (isHtmlToPdf) {
     return (
@@ -204,14 +224,17 @@ const ConversionPage: React.FC = () => {
         <Header />
         
         {!success ? (
-          /* URL Input View */
+          /* HTML Input View */
           <div className="flex items-center justify-center min-h-[calc(100vh-80px)] px-4">
-            <UrlInput
-              url={url}
-              onUrlChange={setUrl}
-              onSubmit={handleUrlSubmit}
-              disabled={loading}
-            />
+            <div className="w-full max-w-2xl">
+              <HtmlInputSelector
+                url={url}
+                onUrlChange={setUrl}
+                onUrlSubmit={handleUrlSubmit}
+                onHtmlSubmit={handleHtmlSubmit}
+                isProcessing={loading}
+              />
+            </div>
           </div>
         ) : (
           /* Conversion Results View with Sidebar */
