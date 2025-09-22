@@ -67,11 +67,11 @@ const conversionConfig: Record<string, {
     acceptedTypes: ['.pdf']
   },
   'jpg-to-pdf': {
-    title: 'JPG to PDF Converter',
-    description: 'Convert JPG images to PDF in seconds. Easily adjust orientation and margins.',
-    fromFormat: 'JPG',
+    title: 'Image to PDF Converter',
+    description: 'Convert JPG, PNG, JPEG and other images to PDF in seconds. Easily adjust orientation and margins.',
+    fromFormat: 'Image',
     toFormat: 'PDF',
-    acceptedTypes: ['.jpg', '.jpeg']
+    acceptedTypes: ['.jpg', '.jpeg', '.png', '.webp', '.bmp', '.gif', '.tiff', '.tif']
   },
   'html-to-pdf': {
     title: 'HTML to PDF Converter',
