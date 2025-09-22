@@ -5,8 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ConversionPage from "./pages/ConversionPage";
-import CompressPage from "./pages/CompressPage";
-import MergePage from "./pages/MergePage";
+import CompressPage from "./pages/CompressionPage";
+import MergePage from "./pages/MergingPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -19,8 +19,8 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/compress" element={<CompressPage />} />
-          <Route path="/merge" element={<MergePage />} />
+          <Route path="/compress" element={<CompressionPage />} />
+          <Route path="/merge" element={<MergingPage />} />
           <Route path="/:type" element={<ConversionPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
