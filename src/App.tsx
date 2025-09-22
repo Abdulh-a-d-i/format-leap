@@ -14,8 +14,8 @@ const App = () => (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/compress" element={<CompressPage />} />
-        <Route path="/merge" element={<MergePage />} />
+        <Route path="/compress" element={<CompressionPage />} />
+        <Route path="/merge" element={<MergingPage />} />
         <Route path="/:type" element={<ConversionPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
