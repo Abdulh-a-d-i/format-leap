@@ -7,6 +7,7 @@ const getBackendUrl = (): string => {
   }
 
   return defaultBase;
+  console.log defaultbase;
 };
 
 export interface CompressResponse {
