@@ -55,7 +55,7 @@ const compressionConfig: Record<string, {
 
 const CompressionPage: React.FC = () => {
   const { type } = useParams<{ type: string }>();
-  const config = type ? compressionConfig[type] : null;
+  const config = type && compressionConfig[type] ? compressionConfig[type] : compressionConfig['compress-pdf']; // Default to compress-pdf
   
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [compressionLevel, setCompressionLevel] = useState<string>('medium');
