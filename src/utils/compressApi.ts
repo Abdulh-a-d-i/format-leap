@@ -4,9 +4,8 @@ const getBackendUrl = (): string => {
 
   if (!import.meta.env.VITE_BACKEND_URL) {
     console.warn("BACKEND_URL not found, using default:", defaultBase);
-  };
+  }
   
-  console.log defaultBase;
   return defaultBase;
   
 };
