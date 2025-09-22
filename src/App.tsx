@@ -1,16 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"; // Import these
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import HomePage from "./pages/HomePage";
 import ConversionPage from "./pages/ConversionPage";
-import CompressPage from "./pages/CompressionPage";
-import MergePage from "./pages/MergingPage";
+import CompressionPage from "./pages/CompressionPage";
+import MergingPage from "./pages/MergingPage";
 import NotFound from "./pages/NotFound";
 
-// Create QueryClient instance
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}> {/* Wrap with QueryClientProvider */}
+  <QueryClientProvider client={queryClient}>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
