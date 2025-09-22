@@ -4,7 +4,10 @@ import Header from '@/components/Header';
 import FileUploader from '@/components/FileUploader';
 import ConvertButton from '@/components/ConvertButton';
 import DownloadSection from '@/components/DownloadSection';
+import UrlInput from '@/components/UrlInput';
+import ConversionSidebar from '@/components/ConversionSidebar';
 import { convertFile } from '@/utils/api';
+import { convertUrlToPdf } from '@/utils/htmlApi';
 import { AlertTriangle, Download } from 'lucide-react';
 
 const conversionConfig: Record<string, {
@@ -91,11 +94,14 @@ const ConversionPage: React.FC = () => {
   const config = type ? conversionConfig[type] : null;
   
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [url, setUrl] = useState<string>('');
   const [loading, setLoading] = useState(false);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const isHtmlToPdf = type === 'html-to-pdf';
 
   if (!config) {
     return (
@@ -141,14 +147,21 @@ const ConversionPage: React.FC = () => {
   };
 
   const handleConvert = async () => {
-    if (!selectedFile || !type) return;
+    if (isHtmlToPdf && !url.trim()) return;
+    if (!isHtmlToPdf && !selectedFile) return;
+    if (!type) return;
 
     setLoading(true);
     resetResults();
 
     try {
-      const targetFormat = getTargetFormat(type);
-      const result = await convertFile(selectedFile, targetFormat);
+      let result;
+      if (isHtmlToPdf) {
+        result = await convertUrlToPdf(url);
+      } else {
+        const targetFormat = getTargetFormat(type);
+        result = await convertFile(selectedFile!, targetFormat);
+      }
       
       if (result.success) {
         setDownloadUrl(result.downloadUrl!);
@@ -164,12 +177,85 @@ const ConversionPage: React.FC = () => {
     }
   };
 
+  const handleUrlSubmit = () => {
+    handleConvert();
+  };
+
   const handleReset = () => {
     setSelectedFile(null);
+    setUrl('');
     resetResults();
   };
 
-  const canConvert = selectedFile && !loading;
+  const handleDownload = () => {
+    if (downloadUrl && fileName) {
+      const link = document.createElement('a');
+      link.href = downloadUrl;
+      link.download = fileName;
+      link.click();
+    }
+  };
+
+  const canConvert = isHtmlToPdf ? url.trim() && !loading : selectedFile && !loading;
+
+  if (isHtmlToPdf) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        
+        {!success ? (
+          /* URL Input View */
+          <div className="flex items-center justify-center min-h-[calc(100vh-80px)] px-4">
+            <UrlInput
+              url={url}
+              onUrlChange={setUrl}
+              onSubmit={handleUrlSubmit}
+              disabled={loading}
+            />
+          </div>
+        ) : (
+          /* Conversion Results View with Sidebar */
+          <div className="flex min-h-[calc(100vh-80px)]">
+            <div className="flex-1 flex items-center justify-center p-8">
+              <div className="text-center">
+                <div className="w-48 h-64 bg-card border-2 border-dashed border-border rounded-lg flex items-center justify-center mb-6 mx-auto">
+                  <div className="text-center">
+                    <Download className="w-12 h-12 text-primary mx-auto mb-2" />
+                    <p className="text-sm text-muted-foreground">PDF Ready</p>
+                  </div>
+                </div>
+                <h3 className="text-lg font-semibold text-foreground mb-2">
+                  Conversion Complete
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  Your PDF is ready for download
+                </p>
+              </div>
+            </div>
+            <ConversionSidebar
+              url={url}
+              downloadUrl={downloadUrl}
+              fileName={fileName}
+              onReset={handleReset}
+              onDownload={handleDownload}
+            />
+          </div>
+        )}
+
+        {error && (
+          <div className="fixed bottom-4 right-4 bg-destructive text-destructive-foreground p-4 rounded-lg shadow-lg">
+            <p className="text-sm">{error}</p>
+            <button 
+              onClick={() => setError(null)}
+              className="absolute top-2 right-2 text-destructive-foreground/60 hover:text-destructive-foreground"
+            >
+              ×
+            </button>
+          </div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
