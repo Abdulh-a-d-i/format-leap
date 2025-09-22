@@ -10,7 +10,8 @@ const getBackendUrl = (): string => {
 
   // Force endpoint to `/compress`
   const baseUrl = import.meta.env.VITE_BACKEND_URL || defaultUrl;
-  return baseUrl.replace(/\/(convert|convert-url)$/, '/compress');
+  //return baseUrl.replace(/\/(convert|convert-url)$/, '/compress');
+  return defaultUrl;
 };
 
 export interface CompressResponse {
