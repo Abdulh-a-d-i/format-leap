@@ -6,7 +6,7 @@ const getBackendUrl = (): string => {
     console.warn("BACKEND_URL not found, using default:", defaultBase);
   }
 
-  return import.meta.env.VITE_BACKEND_URL || defaultBase;
+  return defaultBase;
 };
 
 export interface CompressResponse {
