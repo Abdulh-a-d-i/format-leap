@@ -1,4 +1,3 @@
-// API for HTML to PDF conversion
 const getBackendUrl = (): string => {
   const defaultUrl = 'https://full-shrimp-deeply.ngrok-free.app/convert';
   
@@ -6,8 +5,9 @@ const getBackendUrl = (): string => {
     console.warn('BACKEND_URL not found in environment variables, using default:', defaultUrl);
   }
   
-  return import.meta.env.VITE_BACKEND_URL?.replace('/convert') || defaultUrl;
+  return import.meta.env.VITE_BACKEND_URL || defaultUrl;
 };
+
 
 export interface HtmlConversionResponse {
   success: boolean;
