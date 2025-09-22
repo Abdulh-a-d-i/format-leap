@@ -1,11 +1,11 @@
 const getBackendUrl = (): string => {
-  const defaultUrl = 'https://full-shrimp-deeply.ngrok-free.app/convert';
-  
-  if (!import.meta.env.VITE_BACKEND_URL) {
-    console.warn('BACKEND_URL not found in environment variables, using default:', defaultUrl);
-  }
-  
-  return import.meta.env.VITE_BACKEND_URL || defaultUrl;
+  // default without /convert
+  const defaultBase = "https://full-shrimp-deeply.ngrok-free.app";
+
+  const base = import.meta.env.VITE_BACKEND_URL || defaultBase;
+
+  // always append /convert once
+  return `${base.replace(/\/+$/, "")}/convert`;
 };
 
 
