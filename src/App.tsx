@@ -18,9 +18,10 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/compress" element={<CompressionPage />} />
-          <Route path="/merge" element={<MergingPage />} />
+          <Route path="/merge" element={<MergePage />} />
+          <Route path="/merge-:type" element={<MergingPage />} />
+          <Route path="/compress" element={<CompressPage />} />
+          <Route path="/compress-:type" element={<CompressionPage />} />
           <Route path="/:type" element={<ConversionPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
