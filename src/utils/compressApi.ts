@@ -1,5 +1,5 @@
 const getBackendUrl = (): string => {
-  const defaultUrl = 'https://full-shrimp-deeply.ngrok-free.app/compress';
+  const defaultUrl = 'https://full-shrimp-deeply.ngrok-free.app';
 
   if (!import.meta.env.VITE_BACKEND_URL) {
     console.warn(
@@ -24,7 +24,7 @@ export interface CompressResponse {
   error?: string;
 }
 
-export const compressFile = async (file: File, level: string/*, compressType: string*/): Promise<CompressResponse> => {
+export const compressFile = async (file: File, level: string, compressType: string): Promise<CompressResponse> => {
   try {
     const formData = new FormData();
     formData.append('file', file);
