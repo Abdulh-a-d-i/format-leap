@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ConversionPage from "./pages/ConversionPage";
-import CompressPage from "./pages/CompressPage";
-import MergePage from "./pages/MergePage";
+import CompressPage from "./pages/CompressionPage";
+import MergePage from "./pages/MergingPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
