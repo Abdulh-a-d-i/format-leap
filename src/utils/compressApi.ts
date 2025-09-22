@@ -24,7 +24,7 @@ export interface CompressResponse {
   error?: string;
 }
 
-export const compressFile = async (file: File, level: string, compressType: string): Promise<CompressResponse> => {
+export const compressFile = async (file: File, level: string/*, compressType: string*/): Promise<CompressResponse> => {
   try {
     const formData = new FormData();
     formData.append('file', file);
