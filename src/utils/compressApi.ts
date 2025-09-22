@@ -1,13 +1,13 @@
 const getBackendUrl = (): string => {
-  // Backend base URL (NO /compress here)
   const defaultBase = "https://full-shrimp-deeply.ngrok-free.app";
 
   if (!import.meta.env.VITE_BACKEND_URL) {
-    console.warn("BACKEND_URL not found, using default:", defaultBase);
+    console.warn("⚠️ BACKEND_URL not found, using default:", defaultBase);
+  } else {
+    console.log("✅ Using backend from env:", import.meta.env.VITE_BACKEND_URL);
   }
-  
-  return defaultBase;
-  
+
+  return import.meta.env.VITE_BACKEND_URL || defaultBase;
 };
 
 export interface CompressResponse {
@@ -26,36 +26,74 @@ export const compressFile = async (
   compressType: string
 ): Promise<CompressResponse> => {
   try {
+    console.log("📂 Selected file:", {
+      name: file.name,
+      size: file.size,
+      type: file.type,
+    });
+    console.log("⚙️ Compression params:", { level, compressType });
+
     const formData = new FormData();
     formData.append("file", file);
     formData.append("compress_type", compressType);
     formData.append("level", level);
 
     const backendUrl = `${getBackendUrl()}/compress`;
-
-    console.log("➡️ POSTing to:", backendUrl);
+    console.log("➡️ About to POST to:", backendUrl);
 
     const response = await fetch(backendUrl, {
       method: "POST",
       body: formData,
     });
 
-    console.log("⬅️ Response status:", response.status);
+    console.log("⬅️ Response received:", {
+      status: response.status,
+      statusText: response.statusText,
+      headers: Object.fromEntries(response.headers.entries()),
+    });
 
     if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Compression failed:", errorText);
-      return { success: false, error: errorText };
+      let errorMessage = "Unknown error";
+
+      try {
+        const contentType = response.headers.get("content-type");
+        console.log("🧾 Error response content-type:", contentType);
+
+        if (contentType?.includes("application/json")) {
+          const errorJson = await response.json();
+          console.error("❌ Error JSON:", errorJson);
+          errorMessage = errorJson.detail || errorJson.message || JSON.stringify(errorJson);
+        } else {
+          const errorText = await response.text();
+          console.error("❌ Error Text:", errorText);
+          errorMessage = errorText || "Compression failed.";
+        }
+      } catch (parseErr) {
+        console.error("⚠️ Could not parse error response:", parseErr);
+      }
+
+      return { success: false, error: errorMessage };
     }
 
+    // ✅ success path
     const blob = await response.blob();
-    const downloadUrl = URL.createObjectURL(blob);
+    console.log("📦 Got compressed file blob:", {
+      size: blob.size,
+      type: blob.type,
+    });
 
+    const downloadUrl = URL.createObjectURL(blob);
     const originalSize = file.size;
     const compressedSize = blob.size;
     const compressionRatio = Math.round(
       ((originalSize - compressedSize) / originalSize) * 100
     );
+
+    console.log("✅ Compression successful:", {
+      originalSize,
+      compressedSize,
+      compressionRatio,
+    });
 
     return {
       success: true,
@@ -68,7 +106,10 @@ export const compressFile = async (
       compressionRatio,
     };
   } catch (err) {
-    console.error("❌ Network error:", err);
-    return { success: false, error: (err as Error).message };
+    console.error("💥 Network/JS error:", err);
+    return {
+      success: false,
+      error: err instanceof Error ? err.message : String(err),
+    };
   }
 };
