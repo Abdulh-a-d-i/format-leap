@@ -48,7 +48,7 @@ const mergeConfig: Record<string, {
 
 const MergingPage: React.FC = () => {
   const { type } = useParams<{ type: string }>();
-  const config = type ? mergeConfig[type] : null;
+  const config = type && mergeConfig[type] ? mergeConfig[type] : mergeConfig['merge-pdf']; // Default to merge-pdf
   
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [loading, setLoading] = useState(false);
