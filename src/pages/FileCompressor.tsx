@@ -10,7 +10,7 @@ import FileUploader from '@/components/FileUploader';
 import CompressionLevelSelector from '@/components/CompressionLevelSelector'; // Assume created similar to ConversionSelector
 import CompressButton from '@/components/CompressButton'; // Assume created similar to ConvertButton
 import DownloadSection from '@/components/DownloadSection';
-import { compressFile } from '@/utils/api';
+import { compressFile } from '@/utils/apiClient';
 import { FileText } from 'lucide-react';
 
 const SUPPORTED_TYPES = ['.pdf', '.docx', '.pptx', '.xlsx', '.csv', '.jpg', '.jpeg'];

@@ -7,9 +7,7 @@ import DownloadSection from '@/components/DownloadSection';
 import UrlInput from '@/components/UrlInput';
 import ConversionSidebar from '@/components/ConversionSidebar';
 import HtmlInputSelector from '@/components/HtmlInputSelector';
-import { convertFile } from '@/utils/api';
-import { convertUrlToPdf } from '@/utils/htmlApi';
-import { compressFile } from '@/utils/compressApi';
+import { convertFile, convertUrlToPdf, compressFile } from '@/utils/apiClient';
 import { AlertTriangle, Download } from 'lucide-react';
 
 const conversionConfig: Record<string, {
@@ -170,7 +168,7 @@ const ConversionPage: React.FC = () => {
           return;
         }
       } else if (isCompression) {
-        result = await compressFile(selectedFile!);
+        result = await compressFile(selectedFile!, 'medium');
       } else {
         const targetFormat = getTargetFormat(type);
         result = await convertFile(selectedFile!, targetFormat);

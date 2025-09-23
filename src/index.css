@@ -8,56 +8,67 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Core Colors - iLovePDF theme */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 15%;
+    /* Futuristic Dark Theme */
+    --background: 222 47% 8%;
+    --foreground: 0 0% 95%;
     
-    /* Primary Red - Main brand color like iLovePDF */
-    --primary: 0 84% 60%;
-    --primary-foreground: 0 0% 100%;
-    --primary-glow: 0 84% 70%;
+    /* Cyber Blue Primary */
+    --primary: 200 100% 60%;
+    --primary-foreground: 222 47% 8%;
+    --primary-glow: 200 100% 70%;
+    --primary-variant: 220 100% 50%;
     
-    /* Secondary Colors */
-    --secondary: 220 14.3% 95.9%;
-    --secondary-foreground: 220.9 39.3% 11%;
+    /* Secondary Purple */
+    --secondary: 280 60% 50%;
+    --secondary-foreground: 0 0% 95%;
+    --secondary-glow: 280 60% 60%;
     
     /* Success/Error States */
-    --success: 142.1 76.2% 36.3%;
-    --success-foreground: 355.7 100% 97.3%;
-    --error: 0 84.2% 60.2%;
-    --error-foreground: 210 40% 98%;
+    --success: 150 80% 50%;
+    --success-foreground: 222 47% 8%;
+    --error: 0 80% 60%;
+    --error-foreground: 0 0% 95%;
+    --warning: 45 100% 60%;
+    --warning-foreground: 222 47% 8%;
     
     /* Muted Colors */
-    --muted: 220 14.3% 95.9%;
-    --muted-foreground: 220 8.9% 46.1%;
+    --muted: 222 47% 15%;
+    --muted-foreground: 0 0% 60%;
     
     /* Card & Components */
-    --card: 0 0% 100%;
-    --card-foreground: 224 71.4% 4.1%;
+    --card: 222 47% 10%;
+    --card-foreground: 0 0% 95%;
+    --card-accent: 222 47% 12%;
     
     /* Interactive Elements */
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 221.2 83.2% 53.3%;
+    --border: 222 47% 20%;
+    --input: 222 47% 15%;
+    --ring: 200 100% 60%;
     
     /* Upload Zone */
-    --upload-border: 0 84% 60%;
-    --upload-bg: 0 84% 97%;
-    --upload-hover: 0 84% 95%;
+    --upload-border: 200 100% 60%;
+    --upload-bg: 200 100% 5%;
+    --upload-hover: 200 100% 8%;
     
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(0 84% 60%), hsl(0 84% 70%));
-    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(0 0% 98%));
+    --gradient-primary: linear-gradient(135deg, hsl(200 100% 60%), hsl(280 60% 50%));
+    --gradient-secondary: linear-gradient(135deg, hsl(280 60% 50%), hsl(320 60% 50%));
+    --gradient-card: linear-gradient(145deg, hsl(222 47% 10%), hsl(222 47% 12%));
+    --gradient-cyber: linear-gradient(90deg, hsl(200 100% 60%), hsl(280 60% 50%), hsl(320 60% 50%));
+    --gradient-background: radial-gradient(ellipse at top, hsl(200 100% 10%), hsl(222 47% 8%));
     
-    /* Shadows */
-    --shadow-soft: 0 1px 3px 0 hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
-    --shadow-medium: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -2px hsl(0 0% 0% / 0.1);
-    --shadow-large: 0 10px 15px -3px hsl(0 0% 0% / 0.1), 0 4px 6px -4px hsl(0 0% 0% / 0.1);
-    --shadow-red: 0 4px 6px -1px hsl(0 84% 60% / 0.2);
+    /* Shadows & Glows */
+    --shadow-soft: 0 1px 3px 0 hsl(0 0% 0% / 0.3), 0 1px 2px -1px hsl(0 0% 0% / 0.2);
+    --shadow-medium: 0 4px 6px -1px hsl(0 0% 0% / 0.4), 0 2px 4px -2px hsl(0 0% 0% / 0.3);
+    --shadow-large: 0 10px 15px -3px hsl(0 0% 0% / 0.5), 0 4px 6px -4px hsl(0 0% 0% / 0.4);
+    --shadow-glow: 0 0 20px hsl(200 100% 60% / 0.3);
+    --shadow-purple-glow: 0 0 20px hsl(280 60% 50% / 0.3);
+    --shadow-cyber: 0 0 30px hsl(200 100% 60% / 0.2), 0 0 60px hsl(280 60% 50% / 0.1);
     
     /* Animation */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-cyber: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 
     --radius: 0.75rem;
 
@@ -78,42 +89,18 @@ All colors MUST be HSL.
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+  .light {
+    /* Light mode for accessibility */
+    --background: 0 0% 98%;
+    --foreground: 222 47% 15%;
+    --primary: 200 100% 50%;
+    --primary-foreground: 0 0% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 15%;
+    --muted: 220 14% 95%;
+    --muted-foreground: 220 9% 46%;
+    --border: 220 13% 85%;
+    --input: 220 13% 91%;
   }
 }
 
@@ -124,81 +111,213 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground font-sans;
+    background: var(--gradient-background);
+    min-height: 100vh;
   }
 }
 
 @layer components {
-  /* Upload Zone Styles */
+  /* Futuristic Upload Zone */
   .upload-zone {
-    @apply border-2 border-dashed rounded-xl p-8 text-center transition-all duration-300;
+    @apply border-2 border-dashed rounded-xl p-8 text-center relative overflow-hidden;
     border-color: hsl(var(--upload-border));
     background: hsl(var(--upload-bg));
+    transition: var(--transition-cyber);
+    backdrop-filter: blur(10px);
+  }
+  
+  .upload-zone::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.1), transparent);
+    transition: left 0.5s;
+  }
+  
+  .upload-zone:hover::before {
+    left: 100%;
   }
   
   .upload-zone:hover {
     background: hsl(var(--upload-hover));
-    box-shadow: var(--shadow-red);
-    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-4px) scale(1.02);
+    border-color: hsl(var(--primary-glow));
   }
   
   .upload-zone.drag-over {
     border-color: hsl(var(--primary));
     background: hsl(var(--primary) / 0.05);
-    box-shadow: var(--shadow-red);
+    box-shadow: var(--shadow-cyber);
+    transform: scale(1.05);
   }
   
-  /* Button Variants */
+  /* Futuristic Buttons */
   .btn-converter {
-    @apply px-8 py-3 rounded-lg font-semibold transition-all duration-300;
+    @apply px-8 py-4 rounded-xl font-semibold relative overflow-hidden;
     background: var(--gradient-primary);
     color: hsl(var(--primary-foreground));
-    box-shadow: var(--shadow-medium);
+    transition: var(--transition-cyber);
+    box-shadow: var(--shadow-glow);
+    border: 1px solid hsl(var(--primary) / 0.3);
+  }
+  
+  .btn-converter::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+  
+  .btn-converter:hover:not(:disabled)::before {
+    left: 100%;
   }
   
   .btn-converter:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-large);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: var(--shadow-cyber);
   }
   
   .btn-converter:disabled {
-    opacity: 0.6;
+    opacity: 0.4;
     cursor: not-allowed;
     transform: none;
   }
   
-  /* Loading Animation */
+  /* Cyber Loading Animation */
   .loading-spinner {
-    @apply inline-block w-4 h-4 border-2 border-solid rounded-full animate-spin;
-    border-color: hsl(var(--primary-foreground)) hsl(var(--primary-foreground)) hsl(var(--primary-foreground)) transparent;
+    @apply inline-block w-5 h-5 border-2 border-solid rounded-full;
+    border-color: hsl(var(--primary-foreground)) transparent hsl(var(--primary-foreground)) transparent;
+    animation: cyber-spin 1s linear infinite;
   }
   
-  /* Success/Error Messages */
+  @keyframes cyber-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Futuristic Messages */
   .message-success {
-    @apply flex items-center gap-2 p-4 rounded-lg;
-    background: hsl(var(--success) / 0.1);
+    @apply flex items-center gap-3 p-4 rounded-lg relative overflow-hidden;
+    background: linear-gradient(135deg, hsl(var(--success) / 0.1), hsl(var(--success) / 0.05));
     color: hsl(var(--success));
-    border: 1px solid hsl(var(--success) / 0.2);
+    border: 1px solid hsl(var(--success) / 0.3);
+    box-shadow: 0 0 15px hsl(var(--success) / 0.2);
+    backdrop-filter: blur(10px);
   }
   
   .message-error {
-    @apply flex items-center gap-2 p-4 rounded-lg;
-    background: hsl(var(--error) / 0.1);
+    @apply flex items-center gap-3 p-4 rounded-lg relative overflow-hidden;
+    background: linear-gradient(135deg, hsl(var(--error) / 0.1), hsl(var(--error) / 0.05));
     color: hsl(var(--error));
-    border: 1px solid hsl(var(--error) / 0.2);
+    border: 1px solid hsl(var(--error) / 0.3);
+    box-shadow: 0 0 15px hsl(var(--error) / 0.2);
+    backdrop-filter: blur(10px);
   }
   
-  /* Card Styling */
-  .converter-card {
-    @apply p-8 rounded-2xl border;
+  /* Glassmorphism Cards */
+  .cyber-card {
+    @apply p-6 rounded-2xl relative overflow-hidden cursor-pointer;
     background: var(--gradient-card);
+    border: 1px solid hsl(var(--border));
+    backdrop-filter: blur(15px);
+    transition: var(--transition-cyber);
     box-shadow: var(--shadow-soft);
-    border-color: hsl(var(--border));
+  }
+  
+  .cyber-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--gradient-cyber);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .cyber-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-cyber);
+    border-color: hsl(var(--primary) / 0.5);
+  }
+  
+  .cyber-card:hover::before {
+    opacity: 1;
   }
   
   /* File Display */
   .file-display {
-    @apply flex items-center gap-3 p-4 rounded-lg border;
-    background: hsl(var(--muted) / 0.5);
-    border-color: hsl(var(--border));
+    @apply flex items-center gap-4 p-4 rounded-xl relative overflow-hidden;
+    background: var(--gradient-card);
+    border: 1px solid hsl(var(--border));
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-soft);
+  }
+  
+  /* Cyber Grid Layout */
+  .cyber-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+  }
+  
+  /* Animated Background */
+  .cyber-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    background: var(--gradient-background);
+  }
+  
+  .cyber-bg::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, hsl(var(--primary) / 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: float 20s linear infinite;
+  }
+  
+  @keyframes float {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+  
+  /* Neon Text Effect */
+  .neon-text {
+    text-shadow: 0 0 5px hsl(var(--primary)), 0 0 10px hsl(var(--primary)), 0 0 20px hsl(var(--primary));
+  }
+  
+  /* Progress Bar */
+  .cyber-progress {
+    @apply w-full h-2 rounded-full overflow-hidden;
+    background: hsl(var(--muted));
+  }
+  
+  .cyber-progress-fill {
+    @apply h-full rounded-full;
+    background: var(--gradient-primary);
+    box-shadow: 0 0 10px hsl(var(--primary) / 0.5);
+    animation: pulse 2s ease-in-out infinite alternate;
+  }
+  
+  @keyframes pulse {
+    0% { box-shadow: 0 0 10px hsl(var(--primary) / 0.5); }
+    100% { box-shadow: 0 0 20px hsl(var(--primary) / 0.8); }
   }
 }

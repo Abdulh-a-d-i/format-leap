@@ -7,11 +7,11 @@
 // - For individual pages like /merge-pdf, you can hardcode mergeType='pdf' and remove the selector, filtering files by extension.
 
 import React, { useState } from 'react';
-import FileUploader from '@/components/FileUploader';
+import MultiFileUploader from '@/components/MultiFileUploader';
 import MergeSelector from '@/components/MergeSelector'; // Assume this is created similar to ConversionSelector
 import MergeButton from '@/components/MergeButton'; // Assume this is created similar to ConvertButton
 import DownloadSection from '@/components/DownloadSection';
-import { mergeFiles } from '@/utils/api';
+import { mergeFiles } from '@/utils/apiClient';
 import { FileText } from 'lucide-react';
 
 const SUPPORTED_TYPES = ['.pdf', '.docx', '.pptx', '.xlsx', '.jpg', '.jpeg', '.png'];
@@ -100,19 +100,18 @@ const FileMerger: React.FC = () => {
       {/* Main Content */}
       <main className="max-w-2xl mx-auto px-4 pb-12">
         <div className="merger-card space-y-8">
-          {/* File Upload - Modify FileUploader to handle multiple */}
-          <FileUploader
-            selectedFile={selectedFiles} // Adjust prop to selectedFiles
-            onFileSelect={handleFileSelect}
+          {/* File Upload - Multiple Files */}
+          <MultiFileUploader
+            selectedFiles={selectedFiles}
+            onFilesSelect={setSelectedFiles}
             supportedTypes={SUPPORTED_TYPES}
-            multiple={true} // Add this prop to FileUploader
+            maxFiles={10}
           />
 
           {/* Merge Type Selector */}
           <MergeSelector
-            selectedFiles={selectedFiles}
-            selectedMerge={mergeType}
-            onMergeChange={handleMergeChange}
+            selectedType={mergeType}
+            onTypeSelect={setMergeType}
           />
 
           {/* Merge Button */}

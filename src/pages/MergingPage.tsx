@@ -2,10 +2,10 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '@/components/Header';
-import FileUploader from '@/components/FileUploader'; // Modify this component to support multiple files: add prop multiple?: boolean, and if multiple, onChange e.target.files as File[], etc.
+import MultiFileUploader from '@/components/MultiFileUploader'; // Modify this component to support multiple files: add prop multiple?: boolean, and if multiple, onChange e.target.files as File[], etc.
 import MergeButton from '@/components/MergeButton'; // Assume created similar to ConvertButton
 import DownloadSection from '@/components/DownloadSection';
-import { mergeFiles } from '@/utils/mergeApi'; // Assume new file or in api.ts
+import { mergeFiles } from '@/utils/apiClient'; // Assume new file or in api.ts
 import { AlertTriangle, Download } from 'lucide-react';
 
 const mergeConfig: Record<string, {
@@ -69,8 +69,8 @@ const MergingPage: React.FC = () => {
     );
   }
 
-  const handleFileSelect = (files: File[] | null) => {
-    setSelectedFiles(files || []);
+  const handleFileSelect = (files: File[]) => {
+    setSelectedFiles(files);
     resetResults();
   };
 
@@ -153,11 +153,11 @@ const MergingPage: React.FC = () => {
           {!success ? (
             <div className="space-y-8">
               {/* File Upload - with multiple */}
-              <FileUploader
-                selectedFile={selectedFiles} // Adjust prop to handle array
-                onFileSelect={handleFileSelect}
+              <MultiFileUploader
+                selectedFiles={selectedFiles}
+                onFilesSelect={setSelectedFiles}
                 supportedTypes={config.acceptedTypes}
-                multiple={true}
+                maxFiles={10}
               />
 
               {/* Merge Button */}
